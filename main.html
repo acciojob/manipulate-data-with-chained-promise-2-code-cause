@@ -8,6 +8,33 @@
   <body>
     <!-- do not change this code -->
     <div id="output"></div>
-    <script type="text/javascript" src="./script.js"></script>
+    <script type="text/javascript" src="./script.js">
+		function chained(arr,delay){
+			return new Promise((resolve, reject)=>{
+				setTimeout(()=>{
+					resolve(arr)
+				},delay)
+				
+			})
+		}
+		chained([1,2,3,4],3000).then((arr)=>{
+			let brr=[];
+			for(let t of arr){
+				if(t%2==0){
+					brr.push(t);
+				}
+			}
+			return chained(brr,1000);
+		}).then((brr)=>{
+			let crr=[];
+			for(let t of brr){
+				crr.push(t*2)
+			}
+			//console.log(brr);
+			return chained(crr,2000)
+			
+		})
+		
+	</script>
   </body>
 </html>
